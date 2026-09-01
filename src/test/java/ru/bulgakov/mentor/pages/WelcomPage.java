@@ -1,8 +1,7 @@
-package ru.bulgakov.pages;
+package ru.bulgakov.mentor.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import net.bytebuddy.asm.Advice;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
