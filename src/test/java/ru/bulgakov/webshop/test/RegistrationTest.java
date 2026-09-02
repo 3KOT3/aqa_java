@@ -1,10 +1,9 @@
-package ru.bulgakov.webshop;
+package ru.bulgakov.webshop.test;
 
 import net.datafaker.Faker;
 import org.junit.jupiter.api.Test;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationTest {
@@ -27,6 +26,6 @@ public class RegistrationTest {
                 .confirmPasswordInput(password)
                 .submitRegistration()
                 .checkRegistrarionCompleted()
-                .checkEmailIsShown(email);
+                .checkUserLogIn(email);
     }
 }

@@ -71,7 +71,7 @@ public class WsRegistrationPage {
         return this;
     }
 
-    public WsRegistrationPage checkEmailIsShown(String email) {
+    public WsRegistrationPage checkUserLogIn(String email) {
         headerLinks.get(0).shouldHave(text(email));
         return this;
     }
