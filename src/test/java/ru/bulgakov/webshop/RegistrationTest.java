@@ -2,29 +2,31 @@ package ru.bulgakov.webshop;
 
 import net.datafaker.Faker;
 import org.junit.jupiter.api.Test;
+import ru.bulgakov.webshop.pages.WsWelcomPage;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationTest {
 
     private static final Faker faker = new Faker();
     String password = faker.harryPotter().character() + faker.number().positive();
+    String email = faker.internet().emailAddress();
 
     @Test
     void registrationTest() {
-        open("https://demowebshop.tricentis.com/");
-        $("a.ico-register").click();
-        $("div.page-title").shouldHave(text("Register"));
-        $("input#gender-male").click();
-        $("input#FirstName").setValue(faker.name().firstName());
-        $("input#LastName").setValue(faker.name().lastName());
-        $("input#Email").setValue(faker.internet().emailAddress());
-        $("input#Password").setValue(password);
-        $("input#ConfirmPassword").setValue(password);
-        $("input#register-button").click();
-
-
+        open("https://demowebshop.tricentis.com/", WsWelcomPage.class)
+                .openRegistration()
+                .verifyRegistrationOpened()
+                .registerButton()
+                .selectGenderMale()
+                .enterFirstName(faker.name().firstName())
+                .enterLastName(faker.name().lastName())
+                .enterEmail(email)
+                .enterPassword(password)
+                .confirmPasswordInput(password)
+                .submitRegistration()
+                .checkRegistrarionCompleted()
+                .checkEmailIsShown(email);
     }
 }
