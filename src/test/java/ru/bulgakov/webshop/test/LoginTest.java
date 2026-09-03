@@ -1,48 +1,51 @@
 package ru.bulgakov.webshop.test;
 
 import net.datafaker.Faker;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.bulgakov.webshop.pages.WsRegistrationPage;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static ru.bulgakov.webshop.config.Config.WEB_SHOP_REGISTRATION_URL;
+import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
 public class LoginTest {
     private static final Faker faker = new Faker();
+    private String email;
+    private String password;
+
+    @BeforeEach
+    void beforeAll() {
+        password = faker.harryPotter().character() + faker.number().positive();
+        email = faker.internet().emailAddress();
+
+        open(WEB_SHOP_REGISTRATION_URL, WsRegistrationPage.class)
+                .register(
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        email,
+                        password)
+                .checkUserLogIn(email);
+
+        clearBrowserCookies(); // очистка куков барузера
+        clearBrowserLocalStorage(); // очистка всего localStorage
+
+    }
 
 
     @Test
     void succesLoginTest() {
 
-        String password = faker.harryPotter().character() + faker.number().positive();
-        String email = faker.internet().emailAddress();
-
-        open("https://demowebshop.tricentis.com/", WsWelcomPage.class)
-                .openRegistration()
-                .verifyRegistrationOpened()
-                .registerButton()
-                .selectGenderMale()
-                .enterFirstName(faker.name().firstName())
-                .enterLastName(faker.name().lastName())
-                .enterEmail(email)
-                .enterPassword(password)
-                .confirmPasswordInput(password)
-                .submitRegistration()
-                .checkRegistrarionCompleted()
-                .checkUserLogIn(email);
-
-        clearBrowserCookies();
-        clearBrowserLocalStorage();
-
-        open("https://demowebshop.tricentis.com/", WsWelcomPage.class)
+        open(WEB_SHOP_URL, WsWelcomPage.class)
                 .openLogin()
                 .checkLoginPageOpened()
-        $("input#Email").setValue(email);
-        $("input#Password").setValue(password);
-        $("#RememberMe").click();
-        $("input.login-button").click();
-        $$("div.header-links ul li a").get(0).shouldHave(text(email));
+                .enterEmail(email)
+                .enterPassword(password)
+                .checkRememberMe()
+                .submitLogin()
+                .checkUserLoginIn(email);
 
-        System.out.println(1);
     }
 }

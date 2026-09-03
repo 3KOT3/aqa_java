@@ -21,6 +21,19 @@ public class WsRegistrationPage {
     private final ElementsCollection headerLinks = $$("div.header-links ul li a");
 
 
+    public WsRegistrationPage register(String FirstName, String LastName, String email, String password) {
+        registerButton()
+                .selectGenderMale()
+                .enterFirstName(FirstName)
+                .enterLastName(LastName)
+                .enterEmail(email)
+                .enterPassword(password)
+                .confirmPasswordInput(password)
+                .submitRegistration()
+                .checkRegistrarionCompleted();
+        return this;
+    }
+
     public WsRegistrationPage registerButton() {
         registerButton.click();
         return this;
