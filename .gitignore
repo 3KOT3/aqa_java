@@ -41,3 +41,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+### Selenide / driver artifacts ###
+target/
+build/reports/tests/*.png
+build/reports/tests/*.html
