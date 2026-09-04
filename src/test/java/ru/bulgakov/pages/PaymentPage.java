@@ -5,13 +5,13 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
-public class PaymentPage {
+public class PaymentPage extends BasePage {
 
-    private final SelenideElement validatorAmount =  $(".styles-module-scss-module__kWKzya__prices");
+    private final SelenideElement priceAmount = $("[class*='prices']");
 
+    public PaymentPage checkPriceAmount(String expectedAmount) {
+        priceAmount.shouldHave(text(expectedAmount));
 
-    public PaymentPage validatorAmountPage (String amount){
-        validatorAmount.shouldHave(text(amount));
         return this;
     }
 }
