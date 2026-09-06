@@ -12,17 +12,8 @@ public class WelcomPage {
     private final ElementsCollection amountMentors = $$(".t-menu__list li");
     private final SelenideElement buttonYesoffer = $x("/html/body/div[1]/div[42]/div/div/div[32]/div");
 
+
     public WelcomPage clickPrice() {
-        return this;
-    }
-
-    public WelcomPage customSlleep(int milliseconds) {
-        sleep(milliseconds);
-        return this;
-    }
-
-    public WelcomPage customSwitchToWindow(int index) {
-        switchTo().window(index);
         return this;
     }
 
@@ -40,4 +31,16 @@ public class WelcomPage {
         $(byText(text)).click();
         return this;
     }
+
+    public <T> T switchToWindow(int index, Class<T> pageClass) {
+        switchTo().window(index);
+        return page(pageClass);
+    }
+
+    public WelcomPage buttonLinkPagePayment(String text) {
+        $(byText(text)).click();
+        return this;
+    }
 }
+
+
