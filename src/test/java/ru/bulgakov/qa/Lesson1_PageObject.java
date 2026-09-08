@@ -54,7 +54,7 @@ public class Lesson1_PageObject {
 
                 .ToolsOfThePage()
                 .selectQuoteTool()
-                .сheckingGostPageQoute("Стиль по ГОСТ 7.0.5—2008 (библиографическая ссылка)");
+                .checkingGostPageQoute("Стиль по ГОСТ 7.0.5—2008 (библиографическая ссылка)");
     }
 }
 
