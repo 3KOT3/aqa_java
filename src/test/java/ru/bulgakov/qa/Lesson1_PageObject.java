@@ -40,7 +40,7 @@ public class Lesson1_PageObject {
      9. Проверить что гост = "Стиль по ГОСТ 7.0.5—2008 (библиографическая ссылка)"
      */
 
-
+    @Test
     void WikipediaSearcherAndValidator() {
 
         open(WEBSITE_LINK, WikipediaWelcomPage.class)
