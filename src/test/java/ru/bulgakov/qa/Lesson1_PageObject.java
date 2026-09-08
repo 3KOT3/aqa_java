@@ -1,19 +1,23 @@
 package ru.bulgakov.qa;
 
 import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.bulgakov.pages.*;
 
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.interactable;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 import static ru.bulgakov.config.Config.*;
 
 public class Lesson1_PageObject {
+
+    @BeforeAll
+    static void beforeAll() {
+        Configuration.timeout = 20000;
+        Configuration.pageLoadTimeout = 20000;
+        Configuration.browserSize = "1920x1080";
+
+    }
 
     @Test
     void studyPriceShouldBe47000Test() {
