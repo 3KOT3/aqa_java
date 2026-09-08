@@ -7,19 +7,19 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class WikipediaResutSeacrh {
-    private final SelenideElement categoriesInformation = $(".mw-normal-catlinks ul li a");
-    private final ElementsCollection listEngines = $$("li[id^='mwA']");
+    private final SelenideElement title = $("#firstHeading");
+    private final ElementsCollection searchEngineShares = $$("#mw-content-text li");
     private final SelenideElement pageTool = $("#vector-page-tools-dropdown-checkbox");
     private final SelenideElement quoteTool = $("#t-cite");
 
 
-    public WikipediaResutSeacrh ArticlePage(String articleСategory) {
-        categoriesInformation.shouldHave(text(articleСategory));
+    public WikipediaResutSeacrh checkTitle(String expectedTitle) {
+        title.shouldHave(text(expectedTitle));
         return this;
     }
 
     public WikipediaResutSeacrh verificationInformation(String engines, String marketShare) {
-        listEngines.findBy(text(engines)).shouldHave(text(marketShare));
+        searchEngineShares .findBy(text(engines)).shouldHave(text(marketShare));
         return this;
     }
 

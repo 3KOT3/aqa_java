@@ -11,19 +11,16 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
+import static ru.bulgakov.config.Config.*;
 
 public class Lesson1_PageObject {
 
     @Test
     void studyPriceShouldBe47000Test() {
-        Configuration.browser = "chrome";               // выбор браузера
-        Configuration.pageLoadTimeout = 20000;          // таймаут загрузки страницы
-        Configuration.timeout = 20000;                  // таймаут загрузки элементов
-        Configuration.browserSize = "1920x1080";        // размер браузера
 
-        open("https://ya.ru/", YandexSearchPage.class)
+        open(SEARCH_LINK, YandexSearchPage.class)
                 .search("bulgakov qa")
-                .closeDefaultBrowserSelectWindow()
+                .closeDistributionBannerIfAppeared()
                 .openLink("ivanbulgakovqa.ru")
 
                 .switchToWindow(1, WelcomPage.class)
@@ -31,8 +28,6 @@ public class Lesson1_PageObject {
                 .detailedСonditionsAndAmountMentors()
                 .buttonLinkPagePayment("Бегу оплачивать")
                 .switchToWindow(2, PaymentPage.class)
-
-                .selectPaymentCurrency()
                 .selectCurrency("RUB")
                 .validatorAmountPage("₽ 47 000");
     }
@@ -45,15 +40,14 @@ public class Lesson1_PageObject {
      9. Проверить что гост = "Стиль по ГОСТ 7.0.5—2008 (библиографическая ссылка)"
      */
 
-    @Test
+
     void WikipediaSearcherAndValidator() {
 
-        open("https://ru.wikipedia.org/", WikipediaWelcomPage.class)
+        open(WEBSITE_LINK, WikipediaWelcomPage.class)
                 .insertInput("Информационные технологии")
                 .buttonSearchClick()
 
-                .ArticlePage("Информационные технологии")
-
+                .checkTitle("Информационные технологии")
                 .verificationInformation("Google", "86,64 %")
                 .verificationInformation("Bing", "7 %")
                 .verificationInformation("Yahoo!", "2,75 %")

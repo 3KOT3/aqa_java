@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class WelcomPage {
 
-    private final ElementsCollection amountMentors = $$(".t-menu__list li");
+    private final SelenideElement amountMentors =  $("a.t-menu__link-item[href='#cost']");
     private final SelenideElement buttonYesoffer = $x("/html/body/div[1]/div[42]/div/div/div[32]/div");
 
 
@@ -18,7 +18,7 @@ public class WelcomPage {
     }
 
     public WelcomPage selectMenuAmountMentors() {
-        amountMentors.last().click();
+        amountMentors.click();
         return this;
     }
 
