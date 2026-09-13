@@ -1,4 +1,4 @@
-package ru.bulgakov.config;
+package ru.bulgakov.mentor.config;
 
 public class Config {
 

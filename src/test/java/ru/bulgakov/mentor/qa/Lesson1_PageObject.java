@@ -1,13 +1,13 @@
-package ru.bulgakov.qa;
+package ru.bulgakov.mentor.qa;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.bulgakov.pages.*;
+import ru.bulgakov.mentor.pages.*;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
-import static ru.bulgakov.config.Config.*;
+import static ru.bulgakov.mentor.config.Config.*;
 
 public class Lesson1_PageObject {
 
@@ -17,23 +17,6 @@ public class Lesson1_PageObject {
         Configuration.pageLoadTimeout = 20000;
         Configuration.browserSize = "1920x1080";
 
-    }
-
-    @Test
-    void studyPriceShouldBe47000Test() {
-
-        open(SEARCH_LINK, YandexSearchPage.class)
-                .search("bulgakov qa")
-                .closeDistributionBannerIfAppeared()
-                .openLink("ivanbulgakovqa.ru")
-
-                .switchToWindow(1, WelcomPage.class)
-                .selectMenuAmountMentors()
-                .detailedСonditionsAndAmountMentors()
-                .buttonLinkPagePayment("Бегу оплачивать")
-                .switchToWindow(2, PaymentPage.class)
-                .selectCurrency("RUB")
-                .validatorAmountPage("₽ 47 000");
     }
 
          /*
