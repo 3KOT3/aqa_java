@@ -8,14 +8,11 @@ import ru.bulgakov.webshop.pages.WsCartPage;
 import ru.bulgakov.webshop.pages.WsProductPage;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
-public class CartTest2 {
+public class CartTest2_PageOnject {
     private static final Faker faker = new Faker();
     private final AuthSteps authSteps = new AuthSteps();
 
