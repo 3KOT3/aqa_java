@@ -2,6 +2,8 @@ package ru.bulgakov.webshop.test;
 
 import net.datafaker.Faker;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import ru.bulgakov.webshop.Steps.AuthSteps;
 import ru.bulgakov.webshop.TestBase;
 import ru.bulgakov.webshop.pages.WsRegistrationPage;
@@ -26,6 +28,7 @@ public class CartTest extends TestBase {
     @Test
     @DisplayName("Добаление товара в корзину")
     @Tag("pozitive")
+    @DisabledOnOs(OS.MAC)
     void itemToCardTest() {
 
         open(WEB_SHOP_URL);

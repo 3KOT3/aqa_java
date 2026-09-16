@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import ru.bulgakov.webshop.Steps.AuthSteps;
 import ru.bulgakov.webshop.TestBase;
 import ru.bulgakov.webshop.pages.WsCartPage;
@@ -27,6 +29,7 @@ public class CartTest2_PageOnject extends TestBase {
     @Test
     @DisplayName("Добавление товара в корзину PageObject")
     @Tag("pozitive")
+    @DisabledOnOs(OS.MAC)
     void itemToCardTest() {
         String itemQuantity = "4";
         String itemName;

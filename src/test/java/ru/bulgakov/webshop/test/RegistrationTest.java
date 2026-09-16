@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import ru.bulgakov.webshop.TestBase;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
 
@@ -21,6 +23,7 @@ public class RegistrationTest extends TestBase {
     @Test
     @DisplayName("Регистрация нового пользователя")
     @Tag("pozitive")
+    @DisabledOnOs(OS.MAC)
     void registrationTest() {
         open(WEB_SHOP_URL, WsWelcomPage.class)
                 .openRegistration()

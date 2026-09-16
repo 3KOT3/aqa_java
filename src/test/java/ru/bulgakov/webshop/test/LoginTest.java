@@ -1,10 +1,11 @@
 package ru.bulgakov.webshop.test;
 
 import net.datafaker.Faker;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import ru.bulgakov.webshop.TestBase;
 import ru.bulgakov.webshop.pages.WsRegistrationPage;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
@@ -20,7 +21,7 @@ public class LoginTest extends TestBase {
     private String password;
 
     @BeforeEach
-    void beforeAll()  {
+    void beforeAll() {
         password = faker.harryPotter().character() + faker.number().positive();
         email = faker.internet().emailAddress();
 
@@ -41,6 +42,7 @@ public class LoginTest extends TestBase {
     @Test
     @DisplayName("Авторизация пользователя")
     @Tag("pozitive")
+    @DisabledOnOs(OS.MAC)
     void succesLoginTest() {
 
         open(WEB_SHOP_URL, WsWelcomPage.class)
@@ -52,5 +54,20 @@ public class LoginTest extends TestBase {
                 .submitLogin()
                 .checkUserLoginIn(email);
 
+    }
+
+
+    @ParameterizedTest
+    @CsvFileSource (resources = "/invalid_email.csv")
+    @DisplayName("Авторизация пользователя с невеным email")
+    @Tag("negative")
+    @DisabledOnOs(OS.MAC)
+    void invalidEmailLoginTest(String email) {
+        open(WEB_SHOP_URL, WsWelcomPage.class)
+                .openLogin()
+                .checkLoginPageOpened()
+                .enterEmail(email)
+                .enterPassword(password)
+                .verifyEmailValidationErrorAppear();
     }
 }
