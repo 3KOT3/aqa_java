@@ -2,8 +2,11 @@ package ru.bulgakov.webshop.test;
 
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.bulgakov.webshop.Steps.AuthSteps;
+import ru.bulgakov.webshop.TestBase;
 import ru.bulgakov.webshop.pages.WsCartPage;
 import ru.bulgakov.webshop.pages.WsProductPage;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
@@ -12,7 +15,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
-public class CartTest2_PageOnject {
+public class CartTest2_PageOnject extends TestBase {
     private static final Faker faker = new Faker();
     private final AuthSteps authSteps = new AuthSteps();
 
@@ -22,6 +25,8 @@ public class CartTest2_PageOnject {
     }
 
     @Test
+    @DisplayName("Добавление товара в корзину PageObject")
+    @Tag("pozitive")
     void itemToCardTest() {
         String itemQuantity = "4";
         String itemName;

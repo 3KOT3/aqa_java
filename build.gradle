@@ -16,3 +16,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.register('positiveTest', Test) {
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    useJUnitPlatform {
+        includeTags "pozitive"
+    }
+}

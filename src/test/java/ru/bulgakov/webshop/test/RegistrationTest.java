@@ -2,13 +2,16 @@ package ru.bulgakov.webshop.test;
 
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ru.bulgakov.webshop.TestBase;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
 
 import static com.codeborne.selenide.Selenide.*;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
-public class RegistrationTest {
+public class RegistrationTest extends TestBase {
 
     private static final Faker faker = new Faker();
     String password = faker.harryPotter().character() + faker.number().positive();
@@ -16,6 +19,8 @@ public class RegistrationTest {
 
 
     @Test
+    @DisplayName("Регистрация нового пользователя")
+    @Tag("pozitive")
     void registrationTest() {
         open(WEB_SHOP_URL, WsWelcomPage.class)
                 .openRegistration()
