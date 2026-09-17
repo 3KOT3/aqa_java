@@ -3,8 +3,7 @@ package ru.bulgakov.webshop.pages;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class WsCartPage {
@@ -24,7 +23,7 @@ public class WsCartPage {
     }
 
     public WsCartPage CheckTotalAmountInCart(String itemPrice, String itemQuantity) {
-        totalAmountCart.shouldHave(text(String.valueOf(
+        totalAmountCart.shouldHave(exactText(String.valueOf(
                 Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity))));
         return this;
     }

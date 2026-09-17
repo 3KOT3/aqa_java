@@ -40,17 +40,42 @@ public class CartTest2_PageOnject extends TestBase {
                 .categoryProducts("COMPUTERS")
                 .selectSubCategory("Desktops")
                 .selectProduct(0)
-                .selectProcessorAndQuantity("Medium", itemQuantity);
-        itemName = productPage.saveItemName();
-        itemPrice = productPage.saveItemPrice();
+
+
+        String processor = "Medium";
+        String itemQuantity = "4";
+        WsProductPage productPage = open(WEB_SHOP_URL, WsWelcomPage.class)
+                .categoryProducts("Computers")
+                .selectSubCategory("Desktops")
+                .openProduct(PRODUCT_NAME);
+        float expectedUnitPrice = Float.parseFloat(productPage.getItemPrice())
+                + processorSurcharge(processor);
         WsCartPage cartPage = productPage
-                .bottonAddToCard()
+                .selectProcessor(processor)
+                .setQuantity(itemQuantity)
+                .clickAddToCart()
                 .checkNotificationAddCart()
                 .checkQuantityCartInHeader(itemQuantity)
-                .LinkCartInHeader()
-                .checkItemNameInCart(itemName);
-        itemQuantityInCard = cartPage.saveQuantityInCart();
-        assertEquals(itemQuantity, itemQuantityInCard);
-        cartPage.CheckTotalAmountInCart(itemPrice,itemQuantity);
+                .openCart();
+        String expectedUnitPriceText = String.format(Locale.US, "%.2f", expectedUnitPrice);
+        String expectedSubtotalText = String.format(Locale.US, "%.2f",
+                expectedUnitPrice * Float.parseFloat(itemQuantity));
+        assertAll(
+                () -> assertEquals(PRODUCT_NAME, cartPage.getItemName()),
+                () -> assertEquals(itemQuantity, cartPage.getQuantity()),
+                () -> assertEquals(expectedUnitPriceText, cartPage.getUnitPrice()),
+                () -> assertEquals(expectedSubtotalText, cartPage.getSubtotal())
+        );
+    }
+    private float processorSurcharge(String processor) {
+        return switch (processor) {
+            case "Slow" -> 0f;
+            case "Medium" -> 15f;
+            case "Fast" -> 100f;
+            default -> throw new IllegalArgumentException("Unknown processor: " + processor);
+        };
+    }
+}
+
     }
 }
