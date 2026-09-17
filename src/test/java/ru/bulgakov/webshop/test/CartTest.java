@@ -4,16 +4,14 @@ import net.datafaker.Faker;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
-import ru.bulgakov.webshop.Steps.AuthSteps;
+import ru.bulgakov.webshop.steps.AuthSteps;
 import ru.bulgakov.webshop.TestBase;
-import ru.bulgakov.webshop.pages.WsRegistrationPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.bulgakov.webshop.config.Config.WEB_SHOP_REGISTRATION_URL;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
 public class CartTest extends TestBase {

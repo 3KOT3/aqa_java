@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
-import ru.bulgakov.webshop.Steps.AuthSteps;
+import ru.bulgakov.webshop.steps.AuthSteps;
 import ru.bulgakov.webshop.TestBase;
 import ru.bulgakov.webshop.pages.WsCartPage;
 import ru.bulgakov.webshop.pages.WsProductPage;
