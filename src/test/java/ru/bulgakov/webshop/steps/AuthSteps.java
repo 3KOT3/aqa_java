@@ -1,7 +1,6 @@
-package ru.bulgakov.webshop.Steps;
+package ru.bulgakov.webshop.steps;
 
 import net.datafaker.Faker;
-import org.junit.jupiter.api.BeforeEach;
 import ru.bulgakov.webshop.pages.WsRegistrationPage;
 
 import static com.codeborne.selenide.Selenide.open;

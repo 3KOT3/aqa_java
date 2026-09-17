@@ -1,20 +1,20 @@
 package ru.bulgakov.webshop.test;
 
 import net.datafaker.Faker;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import ru.bulgakov.webshop.Steps.AuthSteps;
-import ru.bulgakov.webshop.pages.WsRegistrationPage;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
+import ru.bulgakov.webshop.steps.AuthSteps;
+import ru.bulgakov.webshop.TestBase;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.bulgakov.webshop.config.Config.WEB_SHOP_REGISTRATION_URL;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
-public class CartTest {
+public class CartTest extends TestBase {
     private static final Faker faker = new Faker();
     private final AuthSteps authSteps = new AuthSteps();
 
@@ -24,6 +24,9 @@ public class CartTest {
     }
 
     @Test
+    @DisplayName("Добаление товара в корзину")
+    @Tag("pozitive")
+    @DisabledOnOs(OS.MAC)
     void itemToCardTest() {
 
         open(WEB_SHOP_URL);

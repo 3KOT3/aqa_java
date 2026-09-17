@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class WsLoginPage {
@@ -13,6 +14,7 @@ public class WsLoginPage {
     private final SelenideElement inputPassword = $("input#Password");
     private final SelenideElement checkRemember = $("#RememberMe");
     private final ElementsCollection checkLoginIn = $$("div.header-links ul li a");
+    private final SelenideElement checkNotificationEmailError = $("span.field-validation-error");
 
     public WsLoginPage checkLoginPageOpened() {
         checkLoginOpened.shouldHave(text("Welcome, Please Sign In!"));
@@ -39,4 +41,8 @@ public class WsLoginPage {
         return this;
     }
 
+    public WsLoginPage verifyEmailValidationErrorAppear() {
+        checkNotificationEmailError.shouldBe(visible);
+        return this;
+    }
 }
