@@ -11,6 +11,8 @@ public class WsCartPage {
     private final SelenideElement itemNameCart = $("a.product-name");
     private final SelenideElement quantityCart = $("input.qty-input");
     private final SelenideElement totalAmountCart = $("span.product-subtotal");
+    private final SelenideElement unitPriceCart = $("span.product-unit-price");
+
 
     public WsCartPage checkItemNameInCart(String itemName) {
         itemNameCart.shouldHave(text(itemName));
@@ -27,5 +29,22 @@ public class WsCartPage {
                 Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity))));
         return this;
     }
+
+    public String getItemName(){
+      return itemNameCart.getText();
+    }
+
+    public String getQuantity() {
+        return quantityCart.getValue();
+    }
+
+    public String getSubtotal(){
+        return totalAmountCart.getText();
+    }
+
+    public String getUnitPrice() {
+        return unitPriceCart.getText();
+    }
+
 }
 

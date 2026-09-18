@@ -13,9 +13,13 @@ import ru.bulgakov.webshop.pages.WsCartPage;
 import ru.bulgakov.webshop.pages.WsProductPage;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
 
+import java.util.Locale;
+
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
+import static ru.bulgakov.webshop.pages.WsProductListPage.PRODUCT_NAME;
 
 public class CartTest2_PageOnject extends TestBase {
     private static final Faker faker = new Faker();
@@ -31,25 +35,18 @@ public class CartTest2_PageOnject extends TestBase {
     @Tag("pozitive")
     @DisabledOnOs(OS.MAC)
     void itemToCardTest() {
-        String itemQuantity = "4";
-        String itemName;
-        String itemPrice;
-        String itemQuantityInCard;
-
-        WsProductPage productPage = open(WEB_SHOP_URL, WsWelcomPage.class)
-                .categoryProducts("COMPUTERS")
-                .selectSubCategory("Desktops")
-                .selectProduct(0)
-
 
         String processor = "Medium";
         String itemQuantity = "4";
+
         WsProductPage productPage = open(WEB_SHOP_URL, WsWelcomPage.class)
                 .categoryProducts("Computers")
                 .selectSubCategory("Desktops")
                 .openProduct(PRODUCT_NAME);
+
         float expectedUnitPrice = Float.parseFloat(productPage.getItemPrice())
                 + processorSurcharge(processor);
+
         WsCartPage cartPage = productPage
                 .selectProcessor(processor)
                 .setQuantity(itemQuantity)
@@ -57,9 +54,11 @@ public class CartTest2_PageOnject extends TestBase {
                 .checkNotificationAddCart()
                 .checkQuantityCartInHeader(itemQuantity)
                 .openCart();
+
         String expectedUnitPriceText = String.format(Locale.US, "%.2f", expectedUnitPrice);
         String expectedSubtotalText = String.format(Locale.US, "%.2f",
                 expectedUnitPrice * Float.parseFloat(itemQuantity));
+
         assertAll(
                 () -> assertEquals(PRODUCT_NAME, cartPage.getItemName()),
                 () -> assertEquals(itemQuantity, cartPage.getQuantity()),
@@ -74,8 +73,5 @@ public class CartTest2_PageOnject extends TestBase {
             case "Fast" -> 100f;
             default -> throw new IllegalArgumentException("Unknown processor: " + processor);
         };
-    }
-}
-
     }
 }
