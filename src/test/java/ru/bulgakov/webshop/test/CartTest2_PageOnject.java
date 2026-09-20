@@ -1,5 +1,6 @@
 package ru.bulgakov.webshop.test;
 
+import io.qameta.allure.*;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,9 +14,14 @@ import ru.bulgakov.webshop.pages.WsCartPage;
 import ru.bulgakov.webshop.pages.WsProductPage;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
 
+import java.util.Locale;
+
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
+import static ru.bulgakov.webshop.pages.WsProductListPage.PRODUCT_NAME;
 
 public class CartTest2_PageOnject extends TestBase {
     private static final Faker faker = new Faker();
@@ -29,28 +35,51 @@ public class CartTest2_PageOnject extends TestBase {
     @Test
     @DisplayName("Добавление товара в корзину PageObject")
     @Tag("pozitive")
+    @Owner("s.shishkin")
+    @Link("тут ссылка на задачу")
+    @Severity(CRITICAL)
+    @Epic("Созданиче личного кабинета пользователя")
+    @Story("Корзина с товарами пользователя")
+    @Feature("Реализиовать возможность удалять и добавлять товары в корщину")
     @DisabledOnOs(OS.MAC)
     void itemToCardTest() {
+
+        String processor = "Medium";
         String itemQuantity = "4";
-        String itemName;
-        String itemPrice;
-        String itemQuantityInCard;
 
         WsProductPage productPage = open(WEB_SHOP_URL, WsWelcomPage.class)
-                .categoryProducts("COMPUTERS")
+                .categoryProducts("Computers")
                 .selectSubCategory("Desktops")
-                .selectProduct(0)
-                .selectProcessorAndQuantity("Medium", itemQuantity);
-        itemName = productPage.saveItemName();
-        itemPrice = productPage.saveItemPrice();
+                .openProduct(PRODUCT_NAME);
+
+        float expectedUnitPrice = Float.parseFloat(productPage.getItemPrice())
+                + processorSurcharge(processor);
+
         WsCartPage cartPage = productPage
-                .bottonAddToCard()
+                .selectProcessor(processor)
+                .setQuantity(itemQuantity)
+                .clickAddToCart()
                 .checkNotificationAddCart()
                 .checkQuantityCartInHeader(itemQuantity)
-                .LinkCartInHeader()
-                .checkItemNameInCart(itemName);
-        itemQuantityInCard = cartPage.saveQuantityInCart();
-        assertEquals(itemQuantity, itemQuantityInCard);
-        cartPage.CheckTotalAmountInCart(itemPrice,itemQuantity);
+                .openCart();
+
+        String expectedUnitPriceText = String.format(Locale.US, "%.2f", expectedUnitPrice);
+        String expectedSubtotalText = String.format(Locale.US, "%.2f",
+                expectedUnitPrice * Float.parseFloat(itemQuantity));
+
+        assertAll(
+                () -> assertEquals(PRODUCT_NAME, cartPage.getItemName()),
+                () -> assertEquals(itemQuantity, cartPage.getQuantity()),
+                () -> assertEquals(expectedUnitPriceText, cartPage.getUnitPrice()),
+                () -> assertEquals(expectedSubtotalText, cartPage.getSubtotal())
+        );
+    }
+    private float processorSurcharge(String processor) {
+        return switch (processor) {
+            case "Slow" -> 0f;
+            case "Medium" -> 15f;
+            case "Fast" -> 100f;
+            default -> throw new IllegalArgumentException("Unknown processor: " + processor);
+        };
     }
 }

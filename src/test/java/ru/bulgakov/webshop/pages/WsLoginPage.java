@@ -2,6 +2,7 @@ package ru.bulgakov.webshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -16,31 +17,37 @@ public class WsLoginPage {
     private final ElementsCollection checkLoginIn = $$("div.header-links ul li a");
     private final SelenideElement checkNotificationEmailError = $("span.field-validation-error");
 
+    @Step("Проверка нахождения на старнице регистрации")
     public WsLoginPage checkLoginPageOpened() {
         checkLoginOpened.shouldHave(text("Welcome, Please Sign In!"));
         return this;
     }
 
+    @Step("Ввести электронную почту {email}")
     public WsLoginPage enterEmail(String email) {
         inputEmail.setValue(email);
         return this;
     }
 
+    @Step("Ввести пароль {password}")
     public WsLoginPage enterPassword(String password) {
         inputPassword.setValue(password);
         return this;
     }
 
+    @Step("Кликнуть на чек-бокс 'запомнить меня'")
     public WsWelcomPage checkRememberMe() {
         checkRemember.click();
         return page(WsWelcomPage.class);
     }
 
+    @Step("Проверка успешной авторизайии {email}")
     public WsLoginPage checkUserLoginIn(String email) {
         checkLoginIn.get(0).shouldHave(text(email));
         return this;
     }
 
+    @Step("Получить ошибку валидации электронной почты")
     public WsLoginPage verifyEmailValidationErrorAppear() {
         checkNotificationEmailError.shouldBe(visible);
         return this;

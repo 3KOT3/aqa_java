@@ -1,13 +1,13 @@
 package ru.bulgakov.mentor.qa;
 
 import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.*;
+import org.junit.jupiter.api.*;
 import ru.bulgakov.mentor.pages.*;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
+import static io.qameta.allure.SeverityLevel.MINOR;
 import static ru.bulgakov.mentor.config.Config.*;
 
 public class Lesson1_PageObject {
@@ -29,7 +29,14 @@ public class Lesson1_PageObject {
      */
 
     @Test
-    @Disabled("Мешает при запуске всех тестов")
+    @DisplayName("Проверка информации в википедии")
+    @Owner("s.shishkin")
+    @Epic("Дополнительные инструменты для работы со статьями")
+    @Story("Разработка инструмента цитирования страниц")
+    @Feature("Реализовать инстурмент цитирования для статей")
+    @Severity(MINOR)
+    @Link("тут ссылка на задачу")
+    @Tag("pozitive")
     void WikipediaSearcherAndValidator() {
 
         open(WEBSITE_LINK, WikipediaWelcomPage.class)
