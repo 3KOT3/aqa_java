@@ -26,6 +26,7 @@ public class WsWelcomPage {
         return page(WsLoginPage.class);
     }
 
+    @Step("Нажать кнопку авторизации")
     public WsLoginPage submitLogin() {
         inputLoginButton.click();
         return page(WsLoginPage.class);
