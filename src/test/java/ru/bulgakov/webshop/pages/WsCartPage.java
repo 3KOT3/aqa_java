@@ -2,6 +2,7 @@ package ru.bulgakov.webshop.pages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -30,18 +31,22 @@ public class WsCartPage {
         return this;
     }
 
+    @Step("Проверить наименование товара в корзине")
     public String getItemName(){
       return itemNameCart.getText();
     }
 
+    @Step("Проверить количесство товара в корзине")
     public String getQuantity() {
         return quantityCart.getValue();
     }
 
+    @Step("Проверить стоимость одного товара в корзине")
     public String getSubtotal(){
         return totalAmountCart.getText();
     }
 
+    @Step("Проверить общую стоимость товаров в корзине")
     public String getUnitPrice() {
         return unitPriceCart.getText();
     }

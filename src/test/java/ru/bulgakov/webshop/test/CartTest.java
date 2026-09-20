@@ -25,6 +25,7 @@ public class CartTest extends TestBase {
 
     @Test
     @DisplayName("Добаление товара в корзину")
+    @Disabled("тест не в формате PageObject")
     @DisabledOnOs(OS.MAC)
     void itemToCardTest() {
 

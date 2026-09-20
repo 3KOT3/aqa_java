@@ -37,7 +37,6 @@ public class Lesson1_PageObject {
     @Severity(MINOR)
     @Link("тут ссылка на задачу")
     @Tag("pozitive")
-    @Disabled("Мешает при запуске всех тестов")
     void WikipediaSearcherAndValidator() {
 
         open(WEBSITE_LINK, WikipediaWelcomPage.class)
