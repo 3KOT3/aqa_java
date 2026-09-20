@@ -25,7 +25,6 @@ public class CartTest extends TestBase {
 
     @Test
     @DisplayName("Добаление товара в корзину")
-    @Tag("pozitive")
     @DisabledOnOs(OS.MAC)
     void itemToCardTest() {
 

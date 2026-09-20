@@ -2,6 +2,7 @@ package ru.bulgakov.webshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -16,6 +17,7 @@ public class WsProductPage {
     private final SelenideElement cartLink = $("#topcartlink a");
     private final SelenideElement attributes = $("div.attributes");
 
+    @Step("Выбрать процессор {processor}")
     public WsProductPage selectProcessor(String processor) {
         attributeOptions("Processor")
                 .findBy(text(processor))
@@ -31,6 +33,7 @@ public class WsProductPage {
                 .$$("li");
     }
 
+    @Step("Указать количество товара {quantity}")
     public WsProductPage setQuantity(String quantity) {
         quantityInput.clear();
         quantityInput.setValue(quantity);
@@ -41,11 +44,13 @@ public class WsProductPage {
         return itemPrice.getText();
     }
 
+    @Step("Добавить товар в корзину")
     public WsProductPage clickAddToCart() {
         buttonAddToCart.click();
         return this;
     }
 
+    @Step("Проверить уведомление о добавлении товара в корзину")
     public WsProductPage checkNotificationAddCart() {
         barNotification.shouldBe(visible)
                 .shouldHave(cssClass("success"))
@@ -53,11 +58,13 @@ public class WsProductPage {
         return this;
     }
 
+    @Step("Проверить количество товара на хедере страницы")
     public WsProductPage checkQuantityCartInHeader(String quantity) {
         cartQuantityBadge.shouldHave(exactText("(" + quantity + ")"));
         return this;
     }
 
+    @Step("Открыть корзину с товарами")
     public WsCartPage openCart() {
         cartLink.click();
         return page(WsCartPage.class);

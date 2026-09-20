@@ -1,5 +1,6 @@
 package ru.bulgakov.webshop.test;
 
+import io.qameta.allure.*;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import ru.bulgakov.webshop.TestBase;
 import ru.bulgakov.webshop.pages.WsWelcomPage;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
 public class RegistrationTest extends TestBase {
@@ -22,6 +24,12 @@ public class RegistrationTest extends TestBase {
 
     @Test
     @DisplayName("Регистрация нового пользователя")
+    @Owner("s.shishkin")
+    @Epic("Созданиче личного кабинета пользователя")
+    @Story("Регистрация пользователя")
+    @Feature("Реализиовать возможность регистрации нового пользователя")
+    @Link("тут ссылка на задачу")
+    @Severity(CRITICAL)
     @Tag("pozitive")
     @DisabledOnOs(OS.MAC)
     void registrationTest() {

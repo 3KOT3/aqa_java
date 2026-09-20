@@ -2,6 +2,7 @@ package ru.bulgakov.webshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -34,56 +35,67 @@ public class WsRegistrationPage {
         return this;
     }
 
+    @Step("Нажать кнопку регистрации")
     public WsRegistrationPage registerButton() {
         registerButton.click();
         return this;
     }
 
+    @Step("Проверка нахождения на странице регистрации")
     public WsRegistrationPage verifyRegistrationOpened() {
         pageTitle.shouldHave(text("Register"));
         return this;
     }
 
+    @Step("Выбрать пол")
     public WsRegistrationPage selectGenderMale() {
         mailGenderRadio.click();
         return this;
     }
 
+    @Step("Ввести имя")
     public WsRegistrationPage enterFirstName(String firstName) {
         firstNameInput.setValue(firstName);
         return this;
     }
 
+    @Step("Ввести фамилию")
     public WsRegistrationPage enterLastName(String lastName) {
         lastNameInput.setValue(lastName);
         return this;
     }
 
+    @Step("Ввести адрес электронной почты {email}")
     public WsRegistrationPage enterEmail(String email) {
         emailInput.setValue(email);
         return this;
     }
 
+    @Step("Ввести адрес пароль {password}")
     public WsRegistrationPage enterPassword(String password) {
         passwordInput.setValue(password);
         return this;
     }
 
+    @Step("Повторить ведённый пароль {password}")
     public WsRegistrationPage confirmPasswordInput(String password) {
         confirmInput.setValue(password);
         return this;
     }
 
+    @Step("Нажать кнопку для регистрации")
     public WsRegistrationPage submitRegistration() {
         submitRagistrationButton.click();
         return this;
     }
 
+    @Step("Проверить успешность регистрации")
     public WsRegistrationPage checkRegistrarionCompleted() {
         resultText.shouldHave(text("Your registration completed"));
         return this;
     }
 
+    @Step("Проверить email после успешной регистрации")
     public WsRegistrationPage checkUserLogIn(String email) {
         headerLinks.get(0).shouldHave(text(email));
         return this;

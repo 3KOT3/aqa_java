@@ -1,5 +1,6 @@
 package ru.bulgakov.webshop.test;
 
+import io.qameta.allure.*;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +17,7 @@ import ru.bulgakov.webshop.pages.WsWelcomPage;
 import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
@@ -33,6 +35,12 @@ public class CartTest2_PageOnject extends TestBase {
     @Test
     @DisplayName("Добавление товара в корзину PageObject")
     @Tag("pozitive")
+    @Owner("s.shishkin")
+    @Link("тут ссылка на задачу")
+    @Severity(CRITICAL)
+    @Epic("Созданиче личного кабинета пользователя")
+    @Story("Корзина с товарами пользователя")
+    @Feature("Реализиовать возможность удалять и добавлять товары в корщину")
     @DisabledOnOs(OS.MAC)
     void itemToCardTest() {
 

@@ -1,6 +1,7 @@
 package ru.bulgakov.webshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.*;
@@ -16,6 +17,7 @@ public class WsProductListPage {
         return page(WsProductPage.class);
     }
 
+    @Step("Выбрать конкнетный товар на старнице {productName)}")
     public WsProductPage openProduct(String productName) {
         productLinks.findBy(exactText(productName)).click();
         return page(WsProductPage.class);
